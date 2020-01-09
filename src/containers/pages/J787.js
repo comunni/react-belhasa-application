@@ -16,21 +16,15 @@ class App extends Component {
       stores: [],
       searchfield: '',
       sortType:'asc'
-
     }
   }
-
-
-
-
-
 
 
   componentDidMount() {
     // fetch('https://jsonplaceholder.typicode.com/users')
     // fetch('https://api.airtable.com/v0/appyqJ5P02SDuX3kL/JOBS?api_key=keyRY5cfsY4k8XIVq')
 
-    fetch('https://api.airtable.com/v0/appyBT8L8RUyoCkWq/JobNos?api_key=keyRY5cfsY4k8XIVq' )
+    fetch('https://api.airtable.com/v0/appzf76R2rrPl6c2x/Table%201?api_key=keyRY5cfsY4k8XIVq' )
 
 
       .then(response=> response.json())
@@ -45,18 +39,22 @@ class App extends Component {
   }
 
   render() {
+
     const { stores, searchfield ,sortType} = this.state;
 
 
     const sorted = stores.sort( (a,b) => {
 
       const isRevised = (sortType === 'asc') ? 1 : -1;
-      return isRevised * a.fields.JobNos.localeCompare(b.fields.JobNos)
+      return isRevised * a.fields.Name.localeCompare(b.fields.Name)
 
   })
+
+
+
     const filteredstores = stores.filter(store =>{
 
-      return ( store.fields.JobNos.toLowerCase().includes(searchfield.toLowerCase())    );
+      return ( store.fields.Name.toLowerCase().includes(searchfield.toLowerCase())    );
 
 
     })
@@ -66,7 +64,7 @@ class App extends Component {
       (
         <div className='tc'>
           {/* <h1 className='f1'>Belhasa Joinery & Decoration LLC</h1> */}
-           <h3 className='f2  pt3  light-green '> Job Nos </h3>
+           <h3 className='f2  pt3  light-green '> J787 WORK ORDERS  </h3>
           <SearchBox searchChange={this.onSearchChange}/>
                     {/* <Scroll> */}
             <CardList stores={filteredstores} />
@@ -78,20 +76,22 @@ class App extends Component {
 
 export default App;
 
+
 const CardList = ({ stores }) => {
   return (
     <div>
       {
-        stores.map((name, i) => {
+        stores.map((user, i) => {
           return (
             <Card
               key={i}
               id={stores[i].fields.id}
-              JobNos={stores[i].fields.JobNos}
-              Contractor={stores[i].fields.Contractor}
+              Name={stores[i].fields.Name}
+              WNO={stores[i].fields.WNO}
+              Item={stores[i].fields.Item}
               Qty={stores[i].fields.Qty}
-              Variation={stores[i].fields.Variation}
-              Total={stores[i].fields.Total}
+              Updated={stores[i].fields.Updated}
+
               />
           );
         })
@@ -103,23 +103,29 @@ const CardList = ({ stores }) => {
 
 
 
-const Card = ({ JobNos,Contractor,Qty,Variation,Total}) => {
+const Card = ({ Name,Item,Qty,WNO,Updated}) => {
   return (
     <div className='tc grow bg-light-green br1 pa1 ma1 dib bw shadow-5'>
-      <div>
 
-            <Banner title= {JobNos}>
-              <p>Cont:{Contractor}</p>
+      <div>
+      {/* <h1>WO NO</h1> */}
+            <Banner title= {Name}>
+              <p>{Item}</p>
               <p>Qty:{Qty} Nos</p>
-              <p>Variance:{Variation} Nos</p>
-              <p>Total Qty:{Total} Nos</p>
-                <Link to={JobNos} className="btn-primary">
+              <p>Updated On:</p>
+              <p>{Updated} </p>
+               <Link to={WNO} className="btn-primary">
                     ENTER
                 </Link>
             </Banner>
 
           </div>
+
+
     </div>
   );
 }
+
+
+
 

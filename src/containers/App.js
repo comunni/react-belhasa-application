@@ -7,6 +7,12 @@ import SingleRoom from './pages/SingleRoom';
 import Error from './pages/Error';
 import Material from './pages/Material';
 import Project from './pages/Project';
+import Jobs from './pages/Jobs';
+import J787 from './pages/J787';
+import W4055 from './pages/W4055';
+
+
+
 import {Route, Switch} from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import FeaturedRoom from './pages/FeaturedRooms';
@@ -21,6 +27,9 @@ function App(){
                     <Route exact path="/store/" component={Store} />
                     <Route exact path="/rooms/" component={Rooms} />
                     <Route exact path="/project/" component={Project} />
+                    <Route exact path="/jobs/" component={Jobs} />
+                    <Route exact path="/J787/" component={J787} />
+                    <Route exact path="/W4055/" component={W4055} />
                     <Route exact path="/material/" component={Material} />
                     <Route exact path="/featuredroom/" component={FeaturedRoom} />
                     <Route exact path="/store/:slug" component={StoreItems} />

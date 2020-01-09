@@ -14,9 +14,7 @@ class App extends Component {
     super()
     this.state = {
       stores: [],
-      searchfield: '',
-      sortType:'asc'
-
+      searchfield: ''
     }
   }
 
@@ -45,15 +43,7 @@ class App extends Component {
   }
 
   render() {
-    const { stores, searchfield ,sortType} = this.state;
-
-
-    const sorted = stores.sort( (a,b) => {
-
-      const isRevised = (sortType === 'asc') ? 1 : -1;
-      return isRevised * a.fields.JobNos.localeCompare(b.fields.JobNos)
-
-  })
+    const { stores, searchfield } = this.state;
     const filteredstores = stores.filter(store =>{
 
       return ( store.fields.JobNos.toLowerCase().includes(searchfield.toLowerCase())    );
@@ -66,7 +56,7 @@ class App extends Component {
       (
         <div className='tc'>
           {/* <h1 className='f1'>Belhasa Joinery & Decoration LLC</h1> */}
-           <h3 className='f2  pt3  light-green '> Job Nos </h3>
+           <h3 className='f2  pt3  light-green '> PROJECTS </h3>
           <SearchBox searchChange={this.onSearchChange}/>
                     {/* <Scroll> */}
             <CardList stores={filteredstores} />
@@ -78,11 +68,12 @@ class App extends Component {
 
 export default App;
 
+
 const CardList = ({ stores }) => {
   return (
     <div>
       {
-        stores.map((name, i) => {
+        stores.map((user, i) => {
           return (
             <Card
               key={i}
@@ -92,6 +83,7 @@ const CardList = ({ stores }) => {
               Qty={stores[i].fields.Qty}
               Variation={stores[i].fields.Variation}
               Total={stores[i].fields.Total}
+
               />
           );
         })
@@ -106,13 +98,13 @@ const CardList = ({ stores }) => {
 const Card = ({ JobNos,Contractor,Qty,Variation,Total}) => {
   return (
     <div className='tc grow bg-light-green br1 pa1 ma1 dib bw shadow-5'>
-      <div>
 
+      <div>
             <Banner title= {JobNos}>
-              <p>Cont:{Contractor}</p>
-              <p>Qty:{Qty} Nos</p>
-              <p>Variance:{Variation} Nos</p>
-              <p>Total Qty:{Total} Nos</p>
+              <p>{Contractor}</p>
+              <p>Qty:{Qty}.Nos</p>
+              <p>Variance:{Variation}.Nos</p>
+              <p>Total Qty:{Total}.Nos</p>
                 <Link to={JobNos} className="btn-primary">
                     ENTER
                 </Link>

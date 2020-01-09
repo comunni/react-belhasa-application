@@ -11,7 +11,8 @@ class App extends Component {
     super()
     this.state = {
       stores: [],
-      searchfield: ''
+      searchfield: '',
+      sortType:'asc'
     }
   }
 
@@ -25,7 +26,7 @@ class App extends Component {
     // fetch('https://jsonplaceholder.typicode.com/users')
     // fetch('https://api.airtable.com/v0/appyqJ5P02SDuX3kL/JOBS?api_key=keyRY5cfsY4k8XIVq')
 
-    fetch('https://api.airtable.com/v0/appyqJ5P02SDuX3kL/JOBS?api_key=keyRY5cfsY4k8XIVq')
+    fetch('https://api.airtable.com/v0/appyqJ5P02SDuX3kL/4055?api_key=keyRY5cfsY4k8XIVq')
 
 
       .then(response=> response.json())
@@ -40,7 +41,15 @@ class App extends Component {
   }
 
   render() {
-    const { stores, searchfield } = this.state;
+    const { stores, searchfield ,sortType} = this.state;
+
+
+    const sorted = stores.sort( (a,b) => {
+
+      const isRevised = (sortType === 'asc') ? 1 : -1;
+      return isRevised * a.fields.Area.localeCompare(b.fields.Area)
+
+  })
     const filteredstores = stores.filter(store =>{
 
       return ( store.fields.JobNo.toLowerCase().includes(searchfield.toLowerCase()) | store.fields.WoNo.toLowerCase().includes(searchfield.toLowerCase()) | store.fields.Material.toLowerCase().includes(searchfield.toLowerCase()) | store.fields.BeechReport.toLowerCase().includes(searchfield.toLowerCase()) | store.fields.Area.toLowerCase().includes(searchfield.toLowerCase())     );
@@ -53,10 +62,11 @@ class App extends Component {
       (
         <div className='tc'>
           {/* <h1 className='f1'>Belhasa Joinery & Decoration LLC</h1> */}
-           <h3 className='f2  pt3  light-green '> PROJECTS </h3>
+           <h3 className='f2  pt3  light-green '> WO 4055 </h3>
           <SearchBox searchChange={this.onSearchChange}/>
                     {/* <Scroll> */}
             <CardList stores={filteredstores} />
+           
           {/* </Scroll> */}
         </div>
       );
@@ -94,8 +104,6 @@ const CardList = ({ stores }) => {
               VarianceBeechQty={stores[i].fields.VarianceBeechQty}
               VarianceBeechAmount={stores[i].fields.VarianceBeechAmount}
               BeechReport={stores[i].fields.BeechReport}
-
-
               />
           );
         })
@@ -109,6 +117,8 @@ const CardList = ({ stores }) => {
 
 const Card = ({ JobNo,WoNo,Item,Qty,Material,Area,EstimatedUnit,BeechQty,BeechRate,BeechAmount,ActualBeechQty,ActualBeechRate,ActualBeechAmount,VarianceBeechQty,VarianceBeechAmount,BeechReport,}) => {
   return (
+
+
     <div className='tc grow bg-light-green br3 pa3 ma2 dib bw2 shadow-5'>
       {/* <img alt='stores' src={`https://robohash.org/${id}?size=200x200`} /> */}
 
@@ -189,13 +199,11 @@ const Card = ({ JobNo,WoNo,Item,Qty,Material,Area,EstimatedUnit,BeechQty,BeechRa
 <li class="ph3 pv2 bb b--light-silver">{BeechReport}</li>
 
 </ul>
-
-
-
-
-
           </div>
     </div>
   );
+
+
 }
+
 
