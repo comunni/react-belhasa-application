@@ -12,22 +12,20 @@ export default class Home extends Component {
         return (
             <React.Fragment>
             <Hero>
-                <Banner title="STORE" subtitle="">
+                <Banner title="Jobs" subtitle="">
+                <Link to='/jobs' className='btn-primary'>Enter..</Link>
+                </Banner>
+                </Hero>
+                <Hero>
+                <Banner title="Store" subtitle="">
                 <Link to='/store' className='btn-primary'>Enter..</Link>
                 </Banner>
                 </Hero>
 
-                <Hero>
-                <Banner title="PROJECT" subtitle="">
-                <Link to='/Project' className='btn-primary'>Enter..</Link>
-                </Banner>
-
-
-                </Hero>
-                <FeaturedRooms />
+                      {/* <FeaturedRooms /> */}
                 {/* <FeaturedItems /> */}
 
-               
+
 
             </React.Fragment>
 
