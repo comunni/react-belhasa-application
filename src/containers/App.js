@@ -10,7 +10,8 @@ import Project from './pages/Project';
 import Jobs from './pages/Jobs';
 import J787 from './pages/J787';
 import W4055 from './pages/W4055';
-
+import W4056 from './pages/W4056';
+import W4057 from './pages/W4057';
 
 
 import {Route, Switch} from 'react-router-dom';
@@ -30,6 +31,8 @@ function App(){
                     <Route exact path="/jobs/" component={Jobs} />
                     <Route exact path="/J787/" component={J787} />
                     <Route exact path="/W4055/" component={W4055} />
+                    <Route exact path="/W4056/" component={W4056} />
+                    <Route exact path="/W4057/" component={W4057} />
                     <Route exact path="/material/" component={Material} />
                     <Route exact path="/featuredroom/" component={FeaturedRoom} />
                     <Route exact path="/store/:slug" component={StoreItems} />

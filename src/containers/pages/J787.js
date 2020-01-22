@@ -91,6 +91,9 @@ const CardList = ({ stores }) => {
               Item={stores[i].fields.Item}
               Qty={stores[i].fields.Qty}
               Updated={stores[i].fields.Updated}
+              Estimated={stores[i].fields.Estimated}
+              Actual={stores[i].fields.Actual}
+              Variance={stores[i].fields.Variance}
 
               />
           );
@@ -103,7 +106,7 @@ const CardList = ({ stores }) => {
 
 
 
-const Card = ({ Name,Item,Qty,WNO,Updated}) => {
+const Card = ({ Name,Item,Qty,WNO,Updated,Estimated,Actual,Variance}) => {
   return (
     <div className='tc grow bg-light-green br1 pa1 ma1 dib bw shadow-5'>
 
@@ -114,6 +117,11 @@ const Card = ({ Name,Item,Qty,WNO,Updated}) => {
               <p>Qty:{Qty} Nos</p>
               <p>Updated On:</p>
               <p>{Updated} </p>
+              <p>Estimated Amount:{Estimated} </p>
+              <p>Actual:{Actual} </p>
+              <p>Variance:{Variance} </p>
+              
+
                <Link to={WNO} className="btn-primary">
                     ENTER
                 </Link>
