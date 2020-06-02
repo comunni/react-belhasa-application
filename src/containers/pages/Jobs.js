@@ -109,7 +109,7 @@ const Card = ({ JobNos,Contractor,Qty,Variation,Total}) => {
       <div>
 
             <Banner title= {JobNos}>
-              <p>Cont:{Contractor}</p>
+              <p>{Contractor}</p>
               <p>Qty:{Qty} Nos</p>
               <p>Variance:{Variation} Nos</p>
               <p>Total Qty:{Total} Nos</p>
